@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	.clock{ 
+		background: url(images/clock.jpg) no-repeat;
+		width: 600px;
+		height: 600px;
+		margin: 40px auto;
+		position: relative;
+		 }
+
+	/*布局为背景图片在大盒子的正中间，大盒子与外面一个大盒子一样大*/
+	span{
+		position: absolute;
+		width: 100%;
+		height: 100% ;
+		top: 0;
+		left: 0;
+	}
+	.h{
+		background: url(images/hour.png) no-repeat center center;
+	}
+	.m{
+		background: url(images/minute.png) no-repeat center center;
+	}
+	.s{
+		background: url(images/second.png) no-repeat center center;
+	}
+	</style>
+</head>
+<body>
+	<div class="clock">
+		<span class="h" id="hour"></span>
+		<span class="m" id="minute"></span>
+		<span class="s" id="second"></span>
+	</div>
+	<script>
+		window.onload = function(){
+			// 首先获取当前的时间，时间与旋转的角度有关系
+			var hour = document.getElementById('hour');
+			var minute = document.getElementById('minute');
+			var second = document.getElementById('second');
+			var date = new Date();
+			var ms = date.getMilliseconds();
+				// console.log(ms);得到的是毫秒数
+				var s = date.getSeconds() + ms/1000;
+				// console.log(s);
+				var m = date.getMinutes() + s/60;
+				
+				var h = date.getHours()%12 + m/60;
+			hour.style.WebkitTransform = "rotate("+ 30*h+"deg)";
+			minute.style.WebkitTransform = "rotate("+ 6*m+"deg)";
+			second.style.WebkitTransform = "rotate("+ 6*s+"deg)";
+			setInterval(function(){
+				//每隔一秒钟second就向右偏一度，旋转是用css3的什么属性
+				//不能只得到现在的分钟或者小时数，应该是几点几小时或者几点几分钟，所以要先获取最小的毫秒数
+				var date = new Date();
+				var ms = date.getMilliseconds();
+				// console.log(ms);得到的是毫秒数
+				var s = date.getSeconds() + ms/1000;
+				// console.log(s);
+				var m = date.getMinutes() + s/60;
+				
+				var h = date.getHours()%12 + m/60;
+				// console.log(h);
+
+			
+				// 当前小时数与度数的关系是 360/12*h ;
+				// console.log(hour);
+				hour.style.WebkitTransform = "rotate("+ 30*h+"deg)";
+				minute.style.WebkitTransform = "rotate("+ 6*m+"deg)";
+				second.style.WebkitTransform = "rotate("+ 6*s+"deg)";
+			},1000)
+		}
+	</script>
+</body>
+</html>

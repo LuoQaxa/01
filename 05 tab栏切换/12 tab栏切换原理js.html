@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 400px;
+            margin:100px auto;
+            border:1px solid #ccc;
+        }
+        .bottom div{
+            width:100%;
+            height: 300px;
+            background-color: pink;
+            display: none;
+        }
+        .purple {
+            background-color: purple;
+        }
+
+    </style>
+    <script>
+        // window.onload = function(){
+        //     var btns = document.getElementsByTagName("button");
+        //     var divs = document.getElementById("divs").getElementsByTagName("div");
+        //     for(var i=0;i<btns.length;i++)
+        //     {
+        //         btns[i].index = i;  // 难点
+        //         btns[i].onclick = function(){
+        //             //让所有的 btn 类名清空
+        //             //alert(this.index);
+        //             for(var j=0;j<btns.length;j++)
+        //             {
+        //                 btns[j].className = "";
+        //             }
+        //             // 当前的那个按钮 的添加 类名
+        //             this.className = "purple";
+        //             //先隐藏下面所有的 div盒子
+        //             for(var i=0;i<divs.length;i++)
+        //             {
+        //                 divs[i].style.display = "none";
+        //             }
+        //             //留下中意的那个 跟点击的序号有关系的
+        //             divs[this.index].style.display ="block";
+        //         }
+        //     }
+        // }
+        // 
+        window.onload = initPage;
+       
+
+        function initPage(){
+           var box = document.getElementById("box");
+           var buttons = box.children[0].children;
+           var divs = document.getElementById('divs').children;
+
+            for(var i=0; i<buttons.length; i++){
+                buttons[i].index = i;
+                buttons[i].onclick = function(){
+                for(var j=0; j<buttons.length; j++){
+                        buttons[j].className = '';
+                       }
+                    this.className = 'purple';
+                //先要隐藏所有的盒子
+                for(var i=0; i<divs.length; i++){
+                    divs[i].style.display = '';
+                    divs[this.index].style.display = 'block';
+                 }
+                }
+            }
+        }
+        
+       
+       
+    </script>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="top">
+        <button>第一个</button>
+        <button>第二个</button>
+        <button>第三个</button>
+        <button>第四个</button>
+        <button>第五个</button>
+    </div>
+    <div class="bottom" id="divs">
+        <div style="display: block;">1好盒子</div>
+        <div>2好盒子</div>
+        <div>3好盒子</div>
+        <div>4好盒子</div>
+        <div>5好盒子</div>
+    </div>
+</div>
+
+</body>
+</html>

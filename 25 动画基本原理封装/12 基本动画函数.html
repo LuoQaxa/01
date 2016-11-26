@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    *{
+        margin:0;
+        padding: 0;
+    }
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<button id="btn200">200</button>
+<button id="btn400">400</button>
+<div id="run"></div>
+</body>
+</html>
+<script>
+    function $(id) {return document.getElementById(id)}
+    $("btn200").onclick = function() {
+        animate($("run"),200);  // animate 自定义函数
+        // 第一个参数  谁做动画    第二参数目标位置
+    }
+    $("btn400").onclick = function() {
+        animate($("run"),400);
+    }
+    var arr = [];
+    arr.index = 10;   // 自定 属性  arr 的 index  arr 专属
+    var index = 20; // 变量   miss 自由的  任何人都可以使用
+    // 运动函数
+   /* for(var i=0; i<lis.length;i++)
+    {
+        lis[i].index = i;
+    }*/
+    function animate(obj,target){
+        obj.timer = setInterval(function() {  // 开启定时器
+            console.log(obj.offsetLeft);
+            if(obj.offsetLeft >= target)
+            {
+                clearInterval(obj.timer);
+            }
+            obj.style.left = obj.offsetLeft + 10 + "px";
+        },30)
+    }
+</script>

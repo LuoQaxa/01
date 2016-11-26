@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul {list-style:none;}
+        body {
+            background-color: #000;
+        }
+        .nav {
+            width: 800px;
+            height: 42px;
+            background:url("images/rss.png") no-repeat right center #fff;
+            margin: 100px auto;
+            border-radius: 5px;
+            position: relative; 
+        }
+        .cloud {
+            width: 83px;
+            height: 42px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url(images/cloud.gif) no-repeat;
+        }
+        .nav ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .nav li {
+            float: left;
+            width: 83px;
+            height: 42px;
+            line-height: 42px;
+            text-align: center;
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="nav" id="nav">
+    <span class="cloud"></span>
+    <ul>
+        <li>首页新闻</li>
+        <li>师资力量</li>
+        <li>活动策划</li>
+        <li>企业文化</li>
+        <li>招聘信息</li>
+        <li>公司简介</li>
+        <li>上海校区</li>
+        <li>广州校区</li>
+    </ul>
+    <script>
+//第一种实现方式是left改变为索引值乘以li的宽度
+        // var nav = document.getElementById('nav');
+        // var cloud = nav.children[0];
+        // var lis = nav.children[1].children;
+        // var leader =0;
+        // var target = 0;
+        // var timer = null;
+
+        // for(var i=0; i<lis.length; i++){
+        // //因为函数里面是循环已经完成了，i已经变成了length值
+        //      lis[i].index = i;
+        //    lis[i].onmouseover = function(){
+
+        //         //触碰到它了之后，cloud的位置就是它的索引值乘以li的宽度
+               
+        //         target = this.index * 83;
+
+        //         // console.log(this.index);
+        //     }
+        // }
+        // timer = setInterval(function(){
+        //     leader = leader + (target -leader ) /3 ;
+        //     cloud.style.left = leader + 'px'
+        // },30)
+//第二种实现方式是用offset值
+        var nav = document.getElementById('nav');
+        var cloud = nav.children[0];
+        var lis = nav.children[1].children;
+        var leader =0;
+        var target = 0;
+        var timer = null;
+
+        for(var i=0; i<lis.length; i++){
+            lis[i].onmouseover = function(){
+               target = this.offsetLeft ; 
+            }
+        }
+        
+        timer = setInterval(function(){
+            leader = leader + (target -leader ) /3 ;
+            cloud.style.left = leader + 'px'
+        },30)
+    </script>
+</div>
+</body>
+</html>

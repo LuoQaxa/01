@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<div id="demo"></div>
+	<!-- 一定是有两个时间，一个结束时间一个现在时间 -->
+	<script>
+		
+		
+		var endtime = new Date("2017/10/30 18:56");
+		var endtimesec = endtime.getTime();
+		var demo = document.getElementById('demo');
+		setInterval(function(){
+			//每次都重新定义现在的时间
+			var nowtime = new Date();
+			var nowtimesec = nowtime.getTime();
+			var second = (endtimesec - nowtimesec) / 1000;
+			// day*24*60*60 = second
+			var day = parseInt(second / 3600 / 24);
+			// console.log(day);
+			var hours = parseInt(second / 3600 % 24);
+			// console.log(hours);
+			var fen = parseInt(second / 60 );
+			// console.log(fen);
+			var m = parseInt(second);
+			demo.innerHTML = "距离我的工作日子还有 "+day+" 天 "+hours+" 小时 "+fen+" 分钟"+m+" 秒 "   
+
+		},1000)
+		// 减出来是毫秒
+	</script>
+</body>
+</html>

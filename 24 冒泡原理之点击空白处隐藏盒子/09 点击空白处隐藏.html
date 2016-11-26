@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            height:2000px;
+        }
+        #mask {
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;   /*半透明*/
+            filter: alpha(opacity = 40);  /*ie 6半透明*/
+            background-color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        #show {
+            width: 300px;
+            height: 300px;
+            background-color: #fff;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin: -150px 0 0 -150px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!-- 两个a标签分别是注册和登陆 -->
+<a href="javascript:;" id="login">注册</a>
+
+<!-- 一个是全部的遮罩层遮罩层是要设置百分之百的宽度和高度并且设置背景颜色，一个是登陆框，要设置为固定定位 -->
+<div id="mask"></div>
+<div id="show"></div>
+<script>
+    // 我们要实现点击注册按钮时出现遮罩层和登陆框，且在点击空白区域的时候两个消失
+    var login = document.getElementById('login');
+    var mask = document.getElementById('mask');
+    var show = document.getElementById('show');
+
+    window.onload = function(){
+        login.onclick = function(event){
+            event = event || window.event;
+            //注意兼容性问题ie是canelbubble
+            if (event && event.stopPropagation) {
+                 event.stopPropagation();
+            }else {
+                // cancelBubble = true
+                 event.cancelBubble = true;
+            }
+           
+            mask.style.display = 'block';
+            show.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        document.onclick =function(event){
+            event = event || window.event;
+            // event.target也有兼容性问题
+            var targetId = event.target ? event.target.id : event.srcElement.id; 
+            if (targetId != 'show') {
+                 mask.style.display = 'none';
+                 show.style.display = 'none'; 
+                 document.body.style.overflow = 'visible';
+            }
+            
+        }
+    }
+    
+
+</script>
+</body>
+</html>

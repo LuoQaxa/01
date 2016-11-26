@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul{list-style: none}
+        *{margin:0; padding:0;}
+        div{
+            width: 1150px;
+            height: 400px;
+            margin:50px auto;
+            border:1px solid red;
+            overflow: hidden;
+        }
+        div li {
+            width: 240px;
+            height: 400px;
+            float: left;
+        }
+        div ul {
+            width: 1300px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="animate.js"></script>
+<script>
+    var box = document.getElementsByTagName("div")[0];
+    var lis = box.children[0].children;
+    
+    for(var i=0;i<lis.length;i++)
+    {
+        lis[i].style.backgroundImage = "url(images/"+(i+1)+".jpg)";
+        lis[i].onmouseover = function() {
+            for(var i=0;i<lis.length;i++)
+            {
+                animate(lis[i],{width:100});
+            }
+            animate(this,{width:800});
+        }
+        lis[i].onmouseout = function(){
+            for(var i=0;i<lis.length;i++)
+            {
+                animate(lis[i],{width:240});
+            }
+         }
+    }
+    
+
+</script>

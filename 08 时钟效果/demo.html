@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .clock {
+            width: 600px;
+            height: 600px;
+            margin:50px auto;
+            background: url(images/clock.jpg) no-repeat;
+            position: relative;
+        }
+        .clock div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+        }
+        .h {
+            background: url(images/hour.png) no-repeat center center;
+        }
+        .m {
+            background: url(images/minute.png) no-repeat center center;
+        }
+        .s {
+            background: url(images/second.png) no-repeat center center;
+        }
+    </style>
+</head>
+<body>
+<div class="clock">
+    <div class="h" id="hour"></div>
+    <div class="m" id="min"></div>
+    <div class="s" id="sec"></div>
+</div>
+<script>
+    var hour = document.getElementById('hour');
+    var minute = document.getElementById('min');
+    var second = document.getElementById('sec');
+
+
+    var timer = setInterval(function(){
+        var date = new Date();
+
+        //获取到了所有的时间
+        //因为返回值是0-23，而表面上是0-12，所以要取余
+        var sec = date.getSeconds();
+        var min = date.getMinutes() + sec / 60 ; 
+        var h = date.getHours() % 12 + min / 60 ;
+        // console.log(  h +'小时' + minute+'分钟' + second + '秒');
+        
+        
+        second.style.transform = 'rotate('+sec * 6+'deg)';
+       
+        minute.style.transform = 'rotate('+min * 6 +'deg)';
+       
+        hour.style.transform = 'rotate('+h * 30 +'deg)'; 
+
+
+    }, 1000)
+</script>
+</body>
+</html>

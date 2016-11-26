@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 300px;
+            height: 500px;
+            border: 1px solid red;
+            margin:100px;
+            position: relative;
+        }
+        .content {
+            height: auto;
+            padding: 5px 18px 5px 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .scroll {
+            width: 18px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #eee;
+        }
+        .bar {
+            width: 100%;
+            height: 30px;
+            background-color: red;
+            cursor: pointer;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="content">
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+     文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分文字内容部分
+
+    </div>
+    <div class="scroll">
+        <div class="bar"></div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var box = document.getElementById("box");  // 最大的盒子
+    var content = box.children[0];  // 内容盒子
+    var scroll = box.children[1];  // 右边盒子
+    var bar = scroll.children[0];
+   // 1. 首先先要计算红色滚动条的高度    内容越多，滚动条越短    反之  反之
+   // 滚动条的长度计算公式:  容器的高度 / 内容的高度 * 容器的高度
+   // box 是 内容盒子一半  那么红色盒子也要是box盒子的一半
+    var barHeight = box.offsetHeight / content.offsetHeight * box.offsetHeight;
+    bar.style.height = barHeight + "px";
+   // 下面开始 拖动 红色盒子
+    startScroll(bar,content);  // 第一次参数 拖动的   第二个参数 内容的盒子
+   function startScroll(obj,target) {
+       obj.onmousedown = function(event) {
+           // alert(11);
+           var event = event || window.event;
+           var t = event.clientY - this.offsetTop ; // 红色盒子距离 父亲 盒子顶部距离
+           var that = this;  // 把 bar 对象给 that 对象
+           document.onmousemove = function(event) {
+               var event = event || window.event;
+               var barTop = event.clientY - t ;  // 红色移动的距离
+               //内容盒子要移动距离
+               // （内容盒子高度 -  大盒子高度） /  (大盒子高度 - 红色盒子的高度)   * 红色盒子移动的数值
+               var contentTop = (target.offsetHeight - target.parentNode.offsetHeight) / (target.parentNode.offsetHeight - that.offsetHeight) *  barTop;
+               // 内容盒子移动的距离
+               if(barTop < 0)
+               {
+                   barTop = 0;
+               }
+               else if(barTop > target.parentNode.offsetHeight - that.offsetHeight)
+               // 大于  大盒子的高度  -  红色盒子的高度
+               {
+                   barTop = target.parentNode.offsetHeight - that.offsetHeight ;
+               }
+               else
+               {
+                   target.style.top = -contentTop + "px";  // 往上走是负值
+               }
+               that.style.top = barTop + "px";
+               window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();   // 防止拖动滑块的时候， 选中文字
+           }
+       }
+           document.onmouseup = function() {
+             document.onmousemove = null;
+       }
+   }
+</script>

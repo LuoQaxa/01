@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input,button {
+            border:0 none;
+            padding:0;
+        }
+        .search {
+            width:258px;
+            height:40px;
+            margin: 100px auto;
+            background-color: pink;
+        }
+        .search input {
+            width:208px;
+            height: 40px;
+            background: url(images/left.jpg) no-repeat;
+            outline-style: none;
+            padding-left: 8px;
+            color: #ccc;
+            float: left;
+        }
+        .search button {
+            height: 40px;
+            width: 42px;
+            background: url(images/right.jpg) no-repeat;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="search">
+    <input id="input" type="text" value="请输入..."/>
+    <button></button>
+</div>
+<script>
+    var input = document.getElementById('input');
+    //如果仅仅是获得焦点就清空也是不对的，因为用户输入后再继续输入是不需要清空的
+    //第一次的时候有请输入，以后的也是有内容的怎么区分开呢？
+    input.onfocus = function(){
+        if (this.value == '请输入...') {
+           this.value = '';
+        }
+        
+    }
+    //我没考虑到如果只是单单失去焦点就加上请输入那用户输入的内容就消失了，所以要加上一个判断
+    input.onblur = function(){
+        if (this.value == '') {
+            this.value ='请输入...'
+        }
+        
+    }
+</script>
+</body>
+</html>

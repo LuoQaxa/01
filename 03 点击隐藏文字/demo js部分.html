@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input,button {
+            border:0 none;
+            padding:0;
+        }
+        .search {
+            width:258px;
+            height:40px;
+            margin: 100px auto;
+            background-color: pink;
+        }
+        .search input {
+            width:208px;
+            height: 40px;
+            background: url(images/left.jpg) no-repeat;
+            outline-style: none;
+            padding-left: 8px;
+            color: #ccc;
+            float: left;
+        }
+        .search button {
+            height: 40px;
+            width: 42px;
+            background: url(images/right.jpg) no-repeat;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+
+            var txt = document.getElementById("txt");
+            txt.onfocus = function(){ //得到焦点
+                //alert("得到了焦点");
+                //什么时候该清空呢
+                //用户没有输入的时候，用户第一次使用的时候
+               // 如果 这里input 里面的文字 是 请输入...  说明用户没有用过，就应该清空
+                if(txt.value == "请输入..."  )
+                {
+                    txt.value = "";
+                    txt.style.color = "#333";
+                }
+            }
+            txt.onblur = function(){ //失去焦点
+                //alert("失去了焦点");
+                //什么时候再还原呢？
+                //input的值是 空的时候，我们再复原
+                if(txt.value == "")
+                {
+                    txt.value = "请输入...";
+                    txt.style.color = "#ccc";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="search">
+    <input type="text" value="请输入..." id="txt"/>
+    <button></button>
+</div>
+</body>
+</html>

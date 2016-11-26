@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            text-align: center;
+            margin:100px auto;
+        }
+        span {
+            display: inline-block;
+            width: 150px;
+            height: 20px;
+            border: 1px solid #ccc;
+            font-size:12px;
+            line-height: 20px;
+            text-align: left;
+            padding-left: 20px;
+            background-color: #eee;
+            color:#999;
+        }
+        .right {  /*正确的*/
+            color: #5EFF5E;
+            background:url(images/right.png) no-repeat #DFFFDF 4px 3px;
+            border: 1px solid #ACFFAC;
+        }
+        .wrong {  /*错误的*/
+            background:url(images/wrong.png) no-repeat #FFDCD0 4px 3px;
+            border: 1px solid #FFAC91;
+            color: #FF6B39;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    语文: <input id="input" type="text"/>  <span id="span">请输入成绩</span>
+</div>
+
+    <script>
+        //当鼠标失去焦点的时候进行判断
+        //这个案例1、判断数据类型，是否为数字用isNaN来判断 2、注意要考虑到任意一种情况
+        var input = document.getElementById('input');
+        var span = document.getElementById('span');
+       
+        input.onblur = function(){
+            var value = this.value;
+           
+           
+            //如何判断它不是数字
+            
+            if (isNaN(this.value)) {
+                 span.innerHTML = '请输入数字';
+                span.className = 'wrong';
+            }else {
+                if (value == '') {
+                    span.innerHTML = '输入不能为空';
+                    span.className = 'wrong';
+                }
+
+                else if (value < 150 && value > 0) {
+                    span.innerHTML = '输入正确'
+                     span.className = 'right';
+                }
+
+                else {
+                    span.innerHTML = '请输入合理范围';
+                    span.className = 'wrong';
+                } 
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#box{
+			width: 100px;
+			height: 100px;
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+
+	var box = document.getElementById('box');
+	var timer = null;
+	box.onmouseover = function(){
+		clearInterval(timer);
+				 var a = 1;
+			timer = setInterval(function(){
+
+		            a++;
+		            console.log(a);
+
+				}, 1000)
+				//如果是这样a就能够实现++效果，因为会保存着上一次执行完后的a的值
+				//如果不清除定时器就会在页面中出现多个相同的定时器，会造成混乱
+
+	}
+		
+	</script>
+</body>
+</html>

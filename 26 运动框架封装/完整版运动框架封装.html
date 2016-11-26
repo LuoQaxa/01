@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	#box{
+		width: 100px;
+		height: 100px;
+		background-color: pink;
+		position: absolute;
+		left: 0;
+	}
+	</style>
+</head>
+<body>
+	<button id="btn">开始</button>
+	<div id="box"></div>
+	<script>
+		var btn = document.getElementById('btn');
+		var box = document.getElementById('box');
+
+		btn.onclick = function(){
+			//传入多个属性是json对象
+			box.animate(box,{left:500px,width:500,height:400px});
+		}
+
+		function animate(obj,json){
+		
+			//动画的原理是每个时刻当前的位置加上步长。
+			obj.timer = function(){
+				
+			}
+			
+		}
+
+
+		//封装的获得当前对象属性值的函数，因为用元素.style.属性的方法只能获取到行内属性。
+		function getStyle(obj,attr){
+			if (obj.currentStyle) {
+				// statement
+				return obj.currentStyle[attr];
+			}
+			else {
+				return window.getComputedStyle(obj,null)[attr];
+			}
+		}
+
+
+	</script>
+</body>
+</html>

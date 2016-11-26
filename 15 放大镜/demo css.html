@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin: 0;padding: 0;}
+        .box {
+            width: 350px;
+            height: 350px;
+            margin:100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .big {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+        .mask {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+        }
+        .small {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <!--小盒子-->
+    <div class="small">
+        <img src="images/001.jpg" alt=""/>
+        <div class="mask"></div>
+    </div>
+    <div class="big">
+        <img src="images/0001.jpg" alt=""/>
+    </div>
+</div>
+</body>
+</html>

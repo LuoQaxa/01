@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	div{
+		width: 100px;
+		height: 100px;
+		background-color: pink;
+		position: absolute;
+		left: 0;
+	}
+	</style>
+</head>
+<body>
+	<button id="btn">点我动</button>
+	<div id="box"></div>
+	<script>
+		var btn = document.getElementById('btn');
+		var div = document.getElementById('box');
+		var target = 400;
+		var leader = 0;
+		var timer = null;
+		btn.onclick = function(){
+			//步长
+			//它怎么知道到了target就停止了呢？因为步长为零了，那我们应该把这个定时关掉
+			setInterval(function(){
+				// console.log(parseInt(leader));
+				leader = leader + (target - leader) / 10;
+				div.style.left = leader + 'px';
+				if (Math.ceil(leader) == 400 ) {
+					clearInterval(timer);
+				}
+			},30)
+		}
+	</script>
+</body>
+</html>

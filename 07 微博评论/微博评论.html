@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		ul,li{
+            list-style-type: none;}
+        *{margin:0;padding: 0;}
+        .box {
+            margin: 100px auto;
+            width: 600px;
+            height: auto;
+            border:1px solid #333;
+            padding: 30px 0;
+        }
+        textarea {
+            width: 450px;
+            resize: none;  /*防止用户拖动 右下角*/
+        }
+        .box li {
+            width: 450px;
+            line-height: 30px;
+            border-bottom:1px dashed #ccc;
+            margin-left: 80px;
+        }
+        .box li a{
+            float: right;
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+	
+	</style>
+</head>
+<body>
+	<div class="box" id="box">
+	<!-- 都是行内块元素 -->
+		微博发布: <textarea name=" " id="" cols="40" rows="10"></textarea> 
+		<input type="button" value="发布">
+	</div>
+	<script>
+		window.onload = function(){
+			var box = document.getElementById('box');
+			var textarea = box.children[0];
+			var input = box.children[1];
+			var newul = document.createElement('ul');
+			box.appendChild(newul);
+
+			input.onclick = function(){
+				
+				var value = textarea.value;
+
+				if (value == '') {
+					alert('内容不能为空')
+					return
+				}else{
+					//这个ul是点击之后才会创建的，但是不是每次都创建所以要写一个来判断
+					//是不是第一次点击发布，如果是第一次的话，还没有li，所以li的个数为0
+					//获取li的个数，然后判断li的个数，如果为0就创建ul，并且把ul插入
+					var lilength = document.getElementsByTagName('li').length;
+					var newli = document.createElement('li');
+					newli.innerHTML = value;
+					var newa = document.createElement('a');
+					newa.innerHTML = '删除';
+					newli.appendChild(newa);
+
+					if (lilength == '0') {
+						newul.appendChild(newli);
+					}else{
+						
+						newul.insertBefore(newli, newul.children[0]);
+					}
+					//点击发布后值要清空
+					textarea.value = '';
+					//对删除绑定事件，如果在点击事件外面写删除事件，当
+
+				}
+
+				
+				//如果写在onclick事件外面，页面加载完时就会运行这段代码，这时候还没删除按钮
+				var aclose = document.getElementsByTagName('a');
+				for(var i=0; i<aclose.length; i++){
+					aclose[i].onclick = function(){
+						newul.removeChild(this.parentNode);
+					}
+				}
+			}
+
+		}
+	</script>
+</body>
+</html>

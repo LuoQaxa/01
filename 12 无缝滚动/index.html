@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	*{margin:0; padding: 0;}
+	ul,li{
+		list-style: none;
+	}
+	img{
+		vertical-align: top;
+	}
+	#box{
+		width: 300px;
+		margin: 60px auto;
+		border:1px solid #ccc;
+		height: 200px;
+		position: relative;
+		overflow: hidden;
+	}
+	#box li{
+		float: left;
+	}
+	#bigbox{
+		width: 500%;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	</style>
+</head>
+<body>
+	<!-- 实现无缝滚动的效果一个盒子上面有一个包裹着图片的大盒子 -->
+	<div id="box">
+		<ul id="bigbox">
+			<li><a href=""><img src="images/01.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/02.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/03.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/04.jpg" alt=""></a></li>
+			<!-- <li><a href=""><img src="images/01.jpg" alt=""></a></li> -->
+		</ul>
+	</div>
+	<script>
+		var bigbox = document.getElementById('bigbox');
+		var n = 0;
+		window.setInterval(move,50);
+		function move(){
+			n +=3;
+			bigbox.style.left = -n+'px';
+			console.log(n);
+			if ( n == 900) {
+				// 跳转的位置非常重要，要保证看不出跳转，因为这是展示两张图片的，所以当在展示第四张的时候，第一张也肯定已经展示出来了当第四张展示完的时候刚好是第一张到达最左边，所以在第四张展示完的时候跳转到第一张就不会看出破绽
+				n = 0;
+				bigbox.style.left = n;
+			}
+		}
+	 	// 现在出现的问题是当走到第四张图的时候没有图了，而我们想要的效果是再回到第一张
+	 	
+	 	//两张图片展示不会出现跳跃感是因为，当播到最后一张的时候播完后刚好是第一张，所以可以直接到第一张
+	</script>
+</body>
+</html>

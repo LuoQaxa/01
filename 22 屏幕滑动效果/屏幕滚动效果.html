@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击滑动效果</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		body,html,ul,li{
+			width: 100%;
+			height: 100%;
+		}
+		ul>li{
+			background-color: pink;
+			padding-left: 20px;
+			
+		}
+		ol{
+			position: fixed;
+			left: 50px;
+			top: 0;
+		}
+		ol>li{
+			width: 50px;
+			height: 50px;
+			border: 1px solid #ccc
+
+		}
+	</style>
+</head>
+<body>
+	<ul id="ul">
+		<li>首页</li>
+		<li>作品</li>
+		<li>书架</li>
+		<li>技术</li>
+		<li>联系我</li>
+	</ul>
+	<ol id="ol">
+		<li>首页</li>
+		<li>作品</li>
+		<li>书架</li>
+		<li>技术</li>
+		<li>联系我</li>
+	</ol>
+	<script src="my.js"></script>
+	 	
+	<script>
+		window.onload = function(){
+			var ullis = document.getElementById('ul').children;
+			var ollis = document.getElementById('ol').children;
+			var color = ["pink","purple","orange","blue","green"];
+			var leader = 0; var target = 0; var timer = null;
+
+			for(var i=0; i<ullis.length; i++){
+				ullis[i].style.backgroundColor = color[i];
+			}
+			for(var i=0; i<ollis.length; i++){
+				ollis[i].style.backgroundColor = color[i];
+				ollis[i].index = i;
+
+				ollis[i].onclick =function(){
+					//选择项的offsetTop值是滑动的长度
+					target = ullis[this.index].offsetTop;  
+					clearInterval(timer);
+
+					timer = setInterval(function(){
+
+						leader = leader + (target - leader ) / 10;
+						window.scrollTo(0,leader);
+
+						if (Math.ceil(leader) == target) {
+							clearInterval(timer)
+						}
+					},30)
+				}
+			}
+
+		}
+	</script>
+</body>
+</html>

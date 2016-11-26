@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>日历</title>
+	<style>
+	#box {
+		width: 200px;
+		background-color: blue;
+		margin: 200px auto;
+		height: 300px;
+		padding:20px;
+	}
+	#box p{
+		text-align: center;
+		font-size: 16px;
+		color: #ccc;
+	}
+	#box span{
+		display: block;
+		font-size: 40px;
+		width: 200px;
+		background-color: pink;
+		text-align: center;
+		height: 200px;
+		line-height: 200px;
+	}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<p></p>
+		<span></span>
+	</div>
+	<script>
+		window.onload = function(){
+			// var title = document.getElementsByTagName('p')[0];
+			// var span = document.getElementsByTagName('span')[0];
+			// var date = new Date();
+			// var n = date.getDate();
+			// alert(n);
+			var box = document.getElementById('box');
+			var boys = box.children;
+			
+			 // var date = new Date(); 
+			 //  boys[1].innerHTML = date.getDate(); 
+			 var arr = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+			  var date = new Date();
+			boys[1].innerHTML = date.getDate();
+			boys[0].innerHTML = date.getFullYear() + '年' + (date.getMonth()+1) + '月' + arr[date.getDay()];
+			// 得到星期几
+			console.log(date.getDay());
+
+		}
+	</script>
+</body>
+</html>

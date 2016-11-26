@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#box {
+			width: 300px;
+			
+			background-color: gray;
+		}
+		#demo{
+			width: 200px;
+			height: 150px;
+			margin: 10px auto;
+			background-color: black;
+			color: white;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="demo">点我就删除我</div>
+	</div>
+	<script>
+		var box = document.getElementById('box');
+		var demo = document.getElementById('demo');
+
+		demo.onclick = function(){
+			box.removeChild(demo);
+		}
+	</script>
+</body>
+</html>

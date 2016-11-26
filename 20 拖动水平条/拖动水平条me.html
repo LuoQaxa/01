@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin:0;padding:0;}
+        .scroll {
+            width: 400px;
+            height: 8px;
+            background-color: #ccc;
+            margin: 100px;
+            position: relative;
+
+        }
+        .bar {
+            width: 10px;
+            height: 22px;
+            background-color: #369;
+            position: absolute;
+            top: -7px;
+            left: 0;
+            cursor: pointer;
+        }
+        .mask {
+            width: 0;
+            height: 100%;
+            background-color: #369;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="scroll" id="scrollBar">
+    <div class="bar"></div>
+    <div class="mask"></div>
+</div>
+<div id="demo"></div>
+</body>
+</html>
+<script>
+
+    var scrollBar = document.getElementById("scrollBar");
+    var bar  = scrollBar.children[0];
+    var mask = scrollBar.children[1];
+    var demo = document.getElementById("demo");
+    var x = 0;
+    var newp = document.createElement('p');
+
+        bar.onmousedown = function(){
+        document.onmousemove = function(event){
+
+            x = event.clientX - bar.parentNode.offsetLeft;
+            if (x <= 0) {
+                x = 0
+            }else if (x >= 390) {
+                x = 390
+            }
+            bar.style.left = x + 'px';
+
+            mask.style.width = x + 'px';
+           
+            var pre =parseInt( x / 390 * 100 ) + "%"; 
+            // 如果demo里还没有p元素就创建并插入,x是不断变化的，但是创建p标签只有第一次，所以应该把赋值写在if外面
+             newp.innerHTML = " 已经走了" + pre;
+             demo.appendChild(newp);
+            
+
+        }
+
+        document.onmouseup = function(event){
+             document.onmousemove = null;
+        }
+    } 
+</script>

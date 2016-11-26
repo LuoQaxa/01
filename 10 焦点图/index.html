@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		#slider{
+			width: 490px;
+			margin: 60px auto;
+			border: 1px solid #ccc;
+			position: relative;
+			height: 170px;
+			overflow: hidden;
+		}
+		#img{
+			width: 600%;
+			position: absolute;
+			left: 0;
+			top: 0;
+
+		}
+		#img li{
+			float: left;
+		}
+		#control {
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+			margin-left: -70px;
+		}
+		#control li{
+			float: left;
+			width: 18px;
+			height: 18px;
+			text-align: center;
+			background-color: #fff;
+			border-radius: 50%;
+			margin: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<!-- 为啥slider会没有高度呢？ slider中的ul是绝对定位， -->
+	<div id="slider">
+		<ul class="img" id="img">
+			<li><a href="#"><img src="images/01.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/02.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/03.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/04.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/05.jpg" alt=""/></a></li>
+		</ul>
+
+		<ul class="control" id="control">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</div>
+	<script>
+		function $(id){
+			return document.getElementById(id);
+		}
+		var dots = $('control').children;
+		var img = $('img');
+		var leader = 0;
+		var target = 0;
+
+		for(var i=0; i<dots.length; i++){
+			dots[i].index = i;
+			dots[i].onmouseover = function(){
+				target = this.index * -490; //目标值,
+			}
+		}
+		//动画是用一个setInterval来做的，每30毫秒移动不同的缓动值。
+		setInterval(function(){
+			leader = leader + (target -leader) / 10;
+			img.style.left = leader+'px';
+		},30)
+		
+	</script>
+</body>
+</html>

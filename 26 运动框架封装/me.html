@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn200">200</button>
+<button id="btn400">400</button>
+<div id="box"></div>
+</body>
+</html>
+<script>
+
+    var btn200 = document.getElementById("btn200");
+    var btn400 = document.getElementById("btn400");
+    var box = document.getElementById("box");
+    
+    btn200.onclick = function() {
+       animate(box,{left:200,width:800,height:400},function(){
+        alert('我来拉')
+       });
+    }
+    btn400.onclick = function() {
+        animate(box,{top:400});
+    }
+    function getStyle(obj,attr){
+        // ie等
+        if (obj.currentStyle) { 
+            return obj.currentStyle[attr];
+        }else {
+            return window.getComputedStyle(obj, null)[attr];
+        }
+    }
+
+    //animate函数传入两个参数obj和json对象
+    function animate(obj,json,fn){
+
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            var flag = true;
+            for(attr in json){
+
+                //能够取到所有的属性
+                //首先取到当前的值,如果是left就取得当前的left值，如果是width就是当前的width值
+                var current = 0;
+                if (attr = 'opacity') {
+                    
+                   current = Math.round(parseInt(getStyle(obj,attr)*100)) || 0;
+                }else {
+                    current = parseInt(getStyle(obj,attr));
+                }
+               
+                var step = (json[attr] - current) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                obj.style[attr] = current + step + 'px'; 
+                //还没有能清除定时器因为要判断三个值都要达到目标值
+                //有其中一个没有达到就不能清除 
+                //还需要注意取到的attr本身就是字符串就不能加字符串符号
+                if (current != json[attr]) {
+                    flag = false
+                }
+            }
+            if (flag) {
+                   clearInterval(obj.timer);
+                   if (fn) {
+                       fn();
+                   }
+            }
+            
+        },30);
+    }
+</script>

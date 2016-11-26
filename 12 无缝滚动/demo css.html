@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        ul{list-style:none;}
+        img {vertical-align: top; }  /*取消图片底部3像素距离*/
+        .box {
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            background-color: pink;
+            position: relative;
+            overflow: hidden;
+        }
+        .box ul li {
+            float: left;
+        }
+        .box ul {
+            width: 500%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="scroll">
+    <ul>
+        <li><img src="images/01.jpg" alt=""/></li>
+        <li><img src="images/02.jpg" alt=""/></li>
+        <li><img src="images/03.jpg" alt=""/></li>
+        <li><img src="images/04.jpg" alt=""/></li>
+        <li><img src="images/01.jpg" alt=""/></li>
+       
+    </ul>
+</div>
+    <script>
+        var scroll = document.getElementById('scroll');
+        var ul = scroll.children[0];
+        var timer = null;
+        var num =0;
+        timer = setInterval(play,30);
+        function play(){
+            num--;
+            if (num <= -1200) {
+                num = 0;
+            }
+            //如果是把num设置为0之后就不动了就可以把num--写在else里面，但是它还是要动，唯一的区别只有num瞬间为0
+            ul.style.left = num + 'px';
+            }
+
+        ul.onmouseover = function(){
+            clearInterval(timer);
+        }
+        ul.onmouseout = function(){
+            timer = setInterval(play,30);
+        }
+    </script>
+</body>
+</html>

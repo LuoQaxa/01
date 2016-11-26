@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        ul{list-style:none;}
+        #box {
+            height: 70px;
+            width: 360px;
+            padding-top: 360px;
+            border:1px solid #ccc;
+            margin:100px auto;
+            overflow: hidden;
+            background: url(images/01big.jpg) no-repeat;
+        }
+        #box ul{
+            overflow: hidden;
+            border-top:1px solid #ccc;
+        }
+        #box li {
+            float: left;
+        }
+
+    </style>
+    <script>
+        window.onload = function(){
+            var box = document.getElementById("box");
+             function fun(id,bg){
+                 var target = document.getElementById(id);  // 事件源
+                 //事件源.事件  = function(){}
+                 target.onmouseover = function(){
+                     //大盒子变背景图片就阔以了
+                     box.style.backgroundImage = bg ;
+                 }
+             }  //封装函数
+             fun("li01","url(images/01big.jpg)");  // 调用函数
+             fun("li02","url(images/02big.jpg)");  // 调用函数
+             fun("li03","url(images/03big.jpg)");  // 调用函数
+             fun("li04","url(images/04big.jpg)");  // 调用函数
+             fun("li05","url(images/05big.jpg)");  // 调用函数
+
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li id="li01"><img src="images/01.jpg" alt=""/></li>
+        <li id="li02"><img src="images/02.jpg" alt=""/></li>
+        <li id="li03"><img src="images/03.jpg" alt=""/></li>
+        <li id="li04"><img src="images/04.jpg" alt=""/></li>
+        <li id="li05"><img src="images/05.jpg" alt=""/></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		//要做倒计时，一定是有两个时间，一个开始时间，一个为结束时间
+		var box = document.getElementById('box');
+		var date = new Date();
+		var nowsec = date.getTime();
+		// console.log(date);打印中当前的时间
+		// Thu Nov 17 2016 14:18:11 GMT+0800 (中国标准时间)
+		var endTime = new Date("2017/07/07 18:00");
+		var endTimesec = endTime.getTime();
+		var second = (endTimesec - nowsec) / 1000;
+
+		//获取年数
+		var days = parseInt(second / 60 / 60 / 24);
+		// 取余数为什么就是小时数了呢？
+		
+		var hours = parseInt(second / 60 / 60 % 24);
+
+		box.innerHTML ='';
+	</script>
+</body>
+</html>

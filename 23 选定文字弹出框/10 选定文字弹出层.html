@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 400px;
+            margin:50px;
+        }
+        #demo {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!-- 两个盒子里面有文字内容，还有一个span盒子是定位的当文字选中的时候再出现 ，并显示选中的内容-->
+<span id="demo"></span>
+<div id="test">我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字我要复制的文字</div>
+<div id="another">
+    我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字 我不要的文字
+</div>
+<script>
+    window.onload = function(){
+    	function $(id) {return document.getElementById(id)};
+    	$('test').onmouseup = function(event){
+    		event = window.event || event;
+    		var txt;
+    		  if(window.getSelection)  // 获取我们选中的文字
+        {
+            txt = window.getSelection().toString();   // 转换为字符串
+        }
+        else
+        {
+            txt = document.selection.createRange().text;   // ie 的写法
+        }
+        //当txt为不为空即 因为所有字符串为真，空字符串为假，所有数字为真，0为假
+    	if (txt) {
+    			$('demo').style.display = 'block';
+    			$('demo').style.left = event.clientX + 4+'px';
+    			$('demo').style.top = event.clientY + 4+'px';
+    		}
+    		$('demo').innerHTML = txt;
+    	}
+    	
+    	   $('test').onmousedown = function(){
+    		$('demo').style.display = 'none';
+    	}
+    }
+</script>
+</body>
+</html>

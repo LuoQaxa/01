@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>a</title>
+</head>
+<body>
+	<div id="box"></div>
+	<button id="button">新增a标签</button>
+	<script>
+	//a标签是可以插入的呀，那是为啥呀 
+		var box = document.getElementById('box');
+		
+		var button = document.getElementById('button');
+		button.onclick = function(){
+			var newli = document.createElement('a');
+			newli.setAttribute('href', '#');
+			newli.innerHTML = '我是a标签'
+			box.appendChild(newli);
+		}
+	</script>
+</body>
+</html>

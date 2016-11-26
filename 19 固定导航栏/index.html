@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		*{margin:0;padding:0}
+		img{
+		    vertical-align: top;
+		}
+		.main{
+		    margin:0 auto;
+		    width:1000px;
+		    margin-top:10px;
+
+		}
+		.fixed {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="top" id="top">
+	    <img src="images/top.png" alt=""/>
+	</div>
+	<div class="nav" id="Q-nav">
+	    <img src="images/nav.png" alt=""/>
+	</div>
+	<div class="main">
+	    <img src="images/main.png" alt=""/>
+	</div>
+	<script src="my.js"></script>
+	<script>
+		//实现固定导航栏，是实时监测scrollTop值，当等于top部分的值时就将导航栏设置为固定定位
+
+		
+		var nav = document.getElementById('Q-nav');
+		var topVal = nav.offsetTop; //得到导航栏离顶部的距离
+		console.log(topVal);
+		window.onscroll = function(){
+			if (scroll().top > topVal) {
+				nav.className = 'nav fixed';
+				// statement
+			}else {
+				nav.className = 'nav';
+			}
+		}
+	</script>
+</body>
+</html>

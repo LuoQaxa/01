@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin: 0;padding: 0;}
+        img {
+            vertical-align: top;
+        }
+        .box {
+            width: 350px;
+            height: 350px;
+            margin:100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .big {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+        .mask {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+        .small {
+            position: relative;
+        }
+        .big img {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="fdj">
+    <!--小盒子-->
+    <div class="small">
+        <img src="images/001.jpg" alt=""/>
+        <div class="mask"></div>
+    </div>
+    <div class="big">
+        <img src="images/0001.jpg" alt=""/>
+    </div>
+</div>
+</body>
+</html>
+<script>
+   var fdj = document.getElementById("fdj");  // 获得最大的盒子
+    var small = fdj.children[0];  // 获得small 小图片 350盒子
+    var big = fdj.children[1];  // 获得 大图片 800 盒子
+    var mask = small.children[1];  // 小的黄色盒子
+   var bigImage = big.children[0]; // 大盒子里面的图片
+   var x = 0;
+   var y = 0;
+
+   small.onmouseover = function(){
+   	mask.style.display = 'block';
+   }
+
+   small.onmousemove = function(e){
+   		x = e.clientX - fdj.offsetLeft - mask.offsetWidth / 2
+   		if ( x <= mask.offsetWidth / 2) {
+   			x = 0;
+   		}else if(x >= 250){
+   			x = 250
+   		}
+   		mask.style.left = x +'px';
+
+   		y = e.clientY - fdj.offsetTop -mask.offsetWidth / 2;
+   		if ( y < mask.offsetHeight /2 ) {
+   			y = 0;
+   		}else if( y > 250){
+   			y = 250;
+   		}
+   		mask.style.top = y +'px';
+
+   		big.style.display = 'block';
+
+   		//应该是改变图片的定位而不是大盒子的定位 
+   		bigImage.style.left =  -x *  big.offsetWidth /small.offsetWidth+ 'px';
+   		bigImage.style.top = -y *  big.offsetHeight /small.offsetHeight+ 'px';
+
+   	}
+
+   	small.onmouseout =function(){
+   		mask.style.display = 'none';
+   		big.style.display = 'none';
+   	}
+</script>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>焦点轮播图</title>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; text-decoration: none;}
+        body { padding: 20px;}
+        #container { width: 600px; height: 400px; border: 3px solid #333; overflow: hidden; position: relative;}
+        #list { width: 4200px; height: 400px; position: absolute; z-index: 1;}
+        #list img { float: left;}
+        #buttons { position: absolute; height: 10px; width: 100px; z-index: 2; bottom: 20px; left: 250px;}
+        #buttons span { cursor: pointer; float: left; border: 1px solid #fff; width: 10px; height: 10px; border-radius: 50%; background: #333; margin-right: 5px;}
+        #buttons .on {  background: orangered;}
+        .arrow { cursor: pointer; display: none; line-height: 39px; text-align: center; font-size: 36px; font-weight: bold; width: 40px; height: 40px;  position: absolute; z-index: 2; top: 180px; background-color: RGBA(0,0,0,.3); color: #fff;}
+        .arrow:hover { background-color: RGBA(0,0,0,.7);}
+        #container:hover .arrow { display: block;}
+        #prev { left: 20px;}
+        #next { right: 20px;}
+    </style>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var container = document.getElementById('container');
+            var list = document.getElementById('list');
+            var buttons = document.getElementById('buttons').getElementsByTagName('span');
+            var prev = document.getElementById('prev');
+            var next = document.getElementById('next');
+            var index = 0;
+            var leader = 0;
+            var target = 0;
+            
+    	//这里是自身的值再加上一个offset值实现的，而我是用一个参数保存left值，然后每次点击都++或者减减
+    	//这里不能直接等于这个函数因为，当点击了之后就相当于调用了这个函数了
+    	prev.onclick = function(){
+    		animate(600);
+    	}
+
+    	next.onclick = function(){
+    		animate(-600);
+    	}
+
+    	//所有的变化的操作都放在一个函数里面，能够很好的控制
+    	function animate(offset){
+    		var newLeft = parseInt(list.style.left) + offset;
+    		
+    		list.style.left = newLeft + 'px';
+
+    		//最初始的位置是图片大框left为-600 当大于-600的时候表示从展示出来的第一张图片
+    		//往左边移动时，当图片left小于-3000时就是当图片向右边移动，移动到第5张图片时是-3000
+    		
+    		if (newLeft < -3000) {
+    			list.style.left = -600 + 'px';
+    		}else if(newLeft > -600){
+    			list.style.left = -3000 + 'px';
+    		}
+
+    		index = Math.abs(parseInt(list.style.left) / 600) 
+    		
+
+    		for(var i=0; i<buttons.length; i++){
+    			for(var j=0; j<buttons.length; j++){
+    				buttons[j].className = '';
+    			}
+    			buttons[index - 1].className = 'on';
+    		} 
+    	}
+
+    	//点击实现小黄点
+    	for(var i=0; i<buttons.length; i++){
+
+    		buttons[i].int = i;
+    		buttons[i].onclick = function(){
+    			for(var j=0; j<buttons.length; j++){
+    				buttons[j].className = '';
+    			}
+    			buttons[this.int].className = 'on';
+
+    			list.style.left = this.int * -600 + -600 + 'px';	
+    		}
+    	}
+
+
+
+    	//接下来为所有的点都加上当前选项，这也是由于动画引发的所以也应该写在动画的函数里面
+    	//我们怎么知道是哪一张图片呢？
+
+    }
+    </script>
+</head>
+<body>
+
+<div id="container">
+    <div id="list" style="left: -600px;">
+        <img src="img/5.jpg" alt="1"/>
+        <img src="img/1.jpg" alt="1"/>
+        <img src="img/2.jpg" alt="2"/>
+        <img src="img/3.jpg" alt="3"/>
+        <img src="img/4.jpg" alt="4"/>
+        <img src="img/5.jpg" alt="5"/>
+        <img src="img/1.jpg" alt="5"/>
+    </div>
+    <div id="buttons">
+        <span index="1" class="on"></span>
+        <span index="2"></span>
+        <span index="3"></span>
+        <span index="4"></span>
+        <span index="5"></span>
+    </div>
+    <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+    <a href="javascript:;" id="next" class="arrow">&gt;</a>
+</div>
+
+</body>
+</html>
